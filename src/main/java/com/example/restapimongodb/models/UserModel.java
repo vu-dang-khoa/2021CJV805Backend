@@ -1,47 +1,44 @@
 package com.example.restapimongodb.models;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("users")
-public class User
+public class UserModel
+
 {
 
     @Id
-    private String _id;
+    private String id;
     private String firstName;
     private String lastName;
-    private String email;;
-    private String password;
+    private String email;
     private String username;
+    private String password;
+    private String role;
 
-    public User() {
+
+    public UserModel()
+    {
+
     }
 
-    public User(String _id, String firstName, String lastName, String email, String password, String username) {
-        this._id = _id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String firstName, String lastName, String email, String password, String username) {
+    public UserModel(String id, String firstName, String lastName, String email, String username, String password, String role) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -68,6 +65,14 @@ public class User
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -76,11 +81,11 @@ public class User
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getRole() {
+        return role;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
