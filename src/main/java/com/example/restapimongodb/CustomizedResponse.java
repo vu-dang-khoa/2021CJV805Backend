@@ -1,6 +1,5 @@
 package com.example.restapimongodb;
 
-import com.example.restapimongodb.models.Movie;
 
 import java.util.List;
 
