@@ -45,11 +45,16 @@ public class UserController
     })
     public ResponseEntity createUsers(@RequestBody UserModel user)
     {
+        try{
+            var response = new CustomizedResponse( " User created successfully", Collections.singletonList(userService.addUser(user)));
+
+            return new ResponseEntity( response, HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
 
 
-        var response = new CustomizedResponse( " User created successfully", Collections.singletonList(userService.addUser(user)));
-
-        return new ResponseEntity( response, HttpStatus.OK);
 
     }
 }
