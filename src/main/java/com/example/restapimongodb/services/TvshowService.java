@@ -58,7 +58,7 @@ public class TvshowService
 
         // business logics
         Query query = new Query();
-        query.addCriteria(Criteria.where(" rating" ).is(r));
+        query.addCriteria(Criteria.where("rating" ).is(r));
         List<Tvshow> tvshows = mongoTemplate.find(query, Tvshow.class);
         return tvshows;
 
@@ -73,7 +73,6 @@ public class TvshowService
         }
         else{
             List<Tvshow> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + r + "\\w*","i")), Tvshow.class);
-            temp.addAll(temp);
             return temp;
         }
 
@@ -147,7 +146,7 @@ public class TvshowService
     }
 
     private boolean isValid(Tvshow tvshow){
-        if (tvshow.getTitle()!=null && tvshow.getDescription()!=null && tvshow.getCategory()!=null && tvshow.getRating()!=0 && tvshow.getRent()!=0 && tvshow.getBuy()!=0 && tvshow.getSmallPoster()!=null && tvshow.getLargePoster()!=null ){
+        if (tvshow.getTitle()!=null && tvshow.getTitle().length()>0 && tvshow.getDescription()!=null && tvshow.getDescription().length()>0 && tvshow.getCategory()!=null && tvshow.getCategory().length()>0 && tvshow.getRating()!=0 && tvshow.getRent()!=0 && tvshow.getBuy()!=0 && tvshow.getSmallPoster()!=null && tvshow.getSmallPoster().length()>0 && tvshow.getLargePoster()!=null && tvshow.getLargePoster().length()>0 ){
             if (tvshow.getRent()>0 && tvshow.getBuy()>0 && tvshow.getRating()>=0 && tvshow.getRating()<6){
                 return true;
             }

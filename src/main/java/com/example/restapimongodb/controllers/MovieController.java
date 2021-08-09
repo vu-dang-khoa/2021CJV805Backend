@@ -37,8 +37,9 @@ public class MovieController {
 
 
     @GetMapping("/movies/rating")
-    public ResponseEntity getmoviesByRating(@RequestParam(value = "rate") int r) {
+    public ResponseEntity getmoviesByRating(@RequestParam("rate") int r) {
 
+        System.out.println(r);
         var customizedResponse = new CustomizedResponse(" A list of movies with the rating : ", service.getMoviesWithRating(r));
 
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
@@ -66,8 +67,7 @@ public class MovieController {
             return new ResponseEntity(customizedResponse, HttpStatus.NOT_FOUND);
 
         }
-//        System.out.println(id);
-//        System.out.println(service.getAMovie(id));
+
         return new ResponseEntity(customizedResponse, HttpStatus.OK);
 
     }

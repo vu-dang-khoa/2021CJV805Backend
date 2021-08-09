@@ -56,9 +56,8 @@ public class MovieService
 
     {
 
-        // business logics
         Query query = new Query();
-        query.addCriteria(Criteria.where(" rating" ).is(r));
+        query.addCriteria(Criteria.where("rating" ).is(r));
         List<Movie> movies = mongoTemplate.find(query, Movie.class);
         return movies;
 
@@ -74,7 +73,6 @@ public class MovieService
         else{
 
             List<Movie> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + r + "\\w*","i")), Movie.class);
-            temp.addAll(temp);
             return temp;
         }
 
@@ -148,7 +146,7 @@ public class MovieService
     }
 
     private boolean isValid(Movie movie){
-        if (movie.getTitle()!=null && movie.getDescription()!=null && movie.getCategory()!=null && movie.getRating()!=0 && movie.getRent()!=0 && movie.getBuy()!=0 && movie.getSmallPoster()!=null && movie.getLargePoster()!=null ){
+        if (movie.getTitle()!=null && movie.getTitle().length()>0 && movie.getDescription()!=null && movie.getDescription().length()>0 && movie.getCategory()!=null && movie.getCategory().length()>0 && movie.getRating()!=0 && movie.getRent()!=0 && movie.getBuy()!=0 && movie.getSmallPoster()!=null && movie.getSmallPoster().length()>0 && movie.getLargePoster()!=null && movie.getLargePoster().length()>0 ){
             if (movie.getRent()>0 && movie.getBuy()>0 && movie.getRating()>=0 && movie.getRating()<6){
                 return true;
             }
