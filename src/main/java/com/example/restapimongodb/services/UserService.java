@@ -133,7 +133,7 @@ public class UserService implements UserDetailsService
 
     private String userNameAndEmailDidntExist(UserModel user){
         String output = "";
-        List<User> usernameList = mongoTemplate.find(new Query().addCriteria(Criteria.where("username").is(user.getUsername())), User.class);
+        List<UserModel> usernameList = mongoTemplate.find(new Query().addCriteria(Criteria.where("username").is(user.getUsername())), UserModel.class);
         if (usernameList.size()!=0){
             output = output + "username already exist";
 
