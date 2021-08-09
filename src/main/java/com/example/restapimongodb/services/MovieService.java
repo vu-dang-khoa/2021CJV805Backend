@@ -72,12 +72,10 @@ public class MovieService
             return new ArrayList<Movie>();
         }
         else{
-            String capitalized = r.substring(0, 1).toUpperCase() + r.substring(1);
-            String allLowerCase = r.toLowerCase();
-            List<Movie> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + capitalized + "\\w*")), Movie.class);
-            List<Movie> temp1 = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + allLowerCase + "\\w*")), Movie.class);
-            temp1.addAll(temp);
-            return temp1;
+
+            List<Movie> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + r + "\\w*","i")), Movie.class);
+            temp.addAll(temp);
+            return temp;
         }
 
 

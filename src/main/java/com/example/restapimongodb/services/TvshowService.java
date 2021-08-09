@@ -72,12 +72,9 @@ public class TvshowService
             return new ArrayList<Tvshow>();
         }
         else{
-            String capitalized = r.substring(0, 1).toUpperCase() + r.substring(1);
-            String allLowerCase = r.toLowerCase();
-            List<Tvshow> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + capitalized + "\\w*")), Tvshow.class);
-            List<Tvshow> temp1 = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + allLowerCase + "\\w*")), Tvshow.class);
-            temp1.addAll(temp);
-            return temp1;
+            List<Tvshow> temp = mongoTemplate.find(new Query(Criteria.where("title").regex("\\w*" + r + "\\w*","i")), Tvshow.class);
+            temp.addAll(temp);
+            return temp;
         }
 
 
