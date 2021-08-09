@@ -48,8 +48,13 @@ public class UserService implements UserDetailsService
             return insertedUser;
         }
         else {
-            String temp = validCheckOutput + " ";
-            temp = temp + uniqueCheckOutput;
+            String temp = "";
+            if (!validCheckOutput.equals("valid")){
+                temp = temp + validCheckOutput;
+            }
+            if (!uniqueCheckOutput.equals("valid")){
+                temp = temp + uniqueCheckOutput;
+            }
             throw new Exception(temp);
         }
 
@@ -128,12 +133,14 @@ public class UserService implements UserDetailsService
 
     private String userNameAndEmailDidntExist(UserModel user){
         String output = "";
-        List<User> usernameList = mongoTemplate.find(new Query().addCriteria(Criteria.where("username" ).is(user.getUsername())), User.class);
+        List<User> usernameList = mongoTemplate.find(new Query().addCriteria(Criteria.where("username").is(user.getUsername())), User.class);
         if (usernameList.size()!=0){
             output = output + "username already exist";
+
         }
 
-        List<User> emailList = mongoTemplate.find(new Query().addCriteria(Criteria.where("email" ).is(user.getEmail())), User.class);
+
+        List<UserModel> emailList = mongoTemplate.find(new Query().addCriteria(Criteria.where("email").is(user.getEmail())), UserModel.class);
         if (emailList.size()!=0){
             output = output + "Useremail already exist";
         }
