@@ -97,6 +97,8 @@ public class UserService implements UserDetailsService
                 output = output + " output should be informat \\w+@\\w+.\\w+";
             }
 
+        }else {
+            output = output + " email can't be empty";
         }
 
         //username
@@ -109,6 +111,8 @@ public class UserService implements UserDetailsService
             if (user.getPassword().length()<6){
                 output = output + " length of password should at least be 6 ";
             }
+        }else {
+            output = output + " password can't be empty";
         }
 
         //lastname
