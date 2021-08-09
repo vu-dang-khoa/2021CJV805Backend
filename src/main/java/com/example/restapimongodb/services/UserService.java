@@ -88,6 +88,24 @@ public class UserService implements UserDetailsService
 
     }
 
+
+    public UserModel getUserByUsernamePassword(String username,String password) throws Exception
+
+    {
+        try{
+            UserModel foundUser = userRepository.findByUsername(username);
+            return foundUser;
+
+        }catch(Exception e){
+            throw new Exception();
+        }
+
+
+
+
+
+    }
+
     public String isValid(UserModel user){
         String output = "";
 

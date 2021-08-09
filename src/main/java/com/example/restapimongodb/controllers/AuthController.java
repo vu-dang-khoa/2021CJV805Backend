@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.restapimongodb.services.UserService;
 
 import java.util.Collections;
 
@@ -24,6 +25,9 @@ public class AuthController
 {
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userservice;
 
     @PostMapping(value = "/auth", consumes = {
             MediaType.APPLICATION_JSON_VALUE
@@ -36,9 +40,12 @@ public class AuthController
 
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
-            var response = new CustomizedResponse( "You login Successfully", null);
+            var response = new CustomizedResponse("you logged in",Collections.singletonList(userservice.getUserByUsernamePassword(user.getUsername(), user.getPassword())));
 
-            return new ResponseEntity( response, HttpStatus.OK);
+                UserModel userReturned = userservice.getUserByUsernamePassword(user.getUsername(), user.getPassword());
+                return new ResponseEntity( response, HttpStatus.OK);
+
+
 
         }
 
@@ -49,11 +56,12 @@ public class AuthController
             var response = new CustomizedResponse( "You username/password were entered incorrectly..", null);
 
             return new ResponseEntity( response, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
-
     }
+
+
 
 
 
